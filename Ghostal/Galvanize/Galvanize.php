@@ -199,9 +199,9 @@ class Galvanize implements IGalvanize
 	private function _start_transaction()
 	{
 		if (!$this->_in_transaction) {
-			$this->_execute('START TRANSACTION');
+			$this->_execute('START TRANSACTION;');
 		} else {
-			$this->_execute('SAVEPOINT ' . $this->_build_savepoint_name($this->_transaction_savepoints + 1));
+			$this->_execute('SAVEPOINT ' . $this->_build_savepoint_name($this->_transaction_savepoints + 1) . ';');
 			$this->_transaction_savepoints++;
 		}
 	}
@@ -211,10 +211,10 @@ class Galvanize implements IGalvanize
 		$this->_assert_in_transaction();
 
 		if ($this->_transaction_savepoints > 0) {
-			$this->_execute('RELEASE SAVEPOINT ' . $this->_build_savepoint_name($this->_transaction_savepoints));
+			$this->_execute('RELEASE SAVEPOINT ' . $this->_build_savepoint_name($this->_transaction_savepoints) . ';');
 			$this->_transaction_savepoints--;
 		} else {
-			$this->_execute('COMMIT');
+			$this->_execute('COMMIT;');
 		}
 	}
 
@@ -223,10 +223,10 @@ class Galvanize implements IGalvanize
 		$this->_assert_in_transaction();
 
 		if ($this->_transaction_savepoints > 0) {
-			$this->_execute('ROLLBACK TO SAVEPOINT ' . $this->_build_savepoint_name($this->_transaction_savepoints));
+			$this->_execute('ROLLBACK TO SAVEPOINT ' . $this->_build_savepoint_name($this->_transaction_savepoints) . ';');
 			$this->_transaction_savepoints--;
 		} else {
-			$this->_execute('ROLLBACK');
+			$this->_execute('ROLLBACK;');
 		}
 	}
 
