@@ -79,6 +79,8 @@ class Galvanize implements IGalvanize
 
 	public function query($sql, $placeholders = [])
 	{
+		$this->_assert_connected();
+
 		return $this->_execute($sql, $placeholders);
 	}
 
