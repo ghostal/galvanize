@@ -200,6 +200,7 @@ class Galvanize implements IGalvanize
 	{
 		if (!$this->_in_transaction) {
 			$this->_execute('START TRANSACTION;');
+			$this->_in_transaction = true;
 		} else {
 			$this->_execute('SAVEPOINT ' . $this->_build_savepoint_name($this->_transaction_savepoints + 1) . ';');
 			$this->_transaction_savepoints++;
@@ -215,6 +216,7 @@ class Galvanize implements IGalvanize
 			$this->_transaction_savepoints--;
 		} else {
 			$this->_execute('COMMIT;');
+			$this->_in_transaction = false;
 		}
 	}
 
@@ -227,6 +229,7 @@ class Galvanize implements IGalvanize
 			$this->_transaction_savepoints--;
 		} else {
 			$this->_execute('ROLLBACK;');
+			$this->_in_transaction = false;
 		}
 	}
 
