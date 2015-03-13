@@ -202,8 +202,8 @@ class Galvanize implements IGalvanize
 			$this->_execute('START TRANSACTION;');
 			$this->_in_transaction = true;
 		} else {
-			$this->_execute('SAVEPOINT ' . $this->_build_savepoint_name($this->_transaction_savepoints + 1) . ';');
 			$this->_transaction_savepoints++;
+			$this->_execute('SAVEPOINT ' . $this->_build_savepoint_name($this->_transaction_savepoints) . ';');
 		}
 	}
 
