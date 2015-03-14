@@ -1,0 +1,13 @@
+<phpunit bootstrap="autoload.php">
+    <testsuites>
+        <testsuite name="Galvanize">
+            <directory suffix="Test.php" phpVersion="5.3.0" phpVersionOperator=">=">Ghostal/Galvanize/Tests</directory>
+        </testsuite>
+    </testsuites>
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">Ghostal/Galvanize/Exceptions</directory>
+            <file>Ghostal/Galvanize/Galvanize.php</file>
+        </whitelist>
+    </filter>
+</phpunit>
