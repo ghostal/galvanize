@@ -124,13 +124,13 @@ class Galvanize implements IGalvanize
 			]
 		)
 		) {
-			$this->reconnect();
 			if ($this->_in_transaction) {
 				// We need to try everything again
 				$e = new Exceptions\ServerUnavailableException($this->_transaction_savepoints, $this->_connection->error, $this->_connection->errno);
-				$this->_reset_transaction_state();
+				$this->reconnect();
 				throw $e;
 			} else {
+				$this->reconnect();
 				return $this->_execute($sql, $placeholders, ++$previous_attempts); // Try again
 			}
 		} else {
