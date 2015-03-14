@@ -107,6 +107,9 @@ class Galvanize implements IGalvanize
 			]
 		)
 		) {
+			// TODO: innodb_rollback_on_timeout is OFF by default.
+			// TODO: Timeouts only causes an implicit rollback if it is ON.
+			// TODO: Otherwise, the query can just be retried.
 			if ($this->_in_transaction) {
 				// Our entire transaction has been rolled back.
 				$e = new Exceptions\DeadlockException($this->_transaction_savepoints, $this->_connection->error, $this->_connection->errno);
