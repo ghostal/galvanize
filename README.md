@@ -1,6 +1,8 @@
 Galvanize
 =========
 
+[![Build Status](https://travis-ci.org/ghostal/galvanize.svg)](https://travis-ci.org/ghostal/galvanize)
+
 Galvanize is a Galera Cluster-safe MySQL database class written in PHP
 
 Usage
