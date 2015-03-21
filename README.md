@@ -1,7 +1,7 @@
 Galvanize
 =========
 
-Galvanize is a Galera Cluster-safe MySQL database class
+Galvanize is a Galera Cluster-safe MySQL database class written in PHP
 
 Usage
 -----
