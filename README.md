@@ -3,6 +3,37 @@ Galvanize
 
 Galvanize is a Galera Cluster-safe MySQL database class
 
+Usage
+-----
+
+	$config = [
+		'host' => 'localhost',
+		'user' => 'root',
+		'password' => '',
+		'database' => 'test',
+		'charset' => 'utf8'
+	];
+	$galvanize = new Galvanize(mysqli_init(), $config);
+	$galvanize->connect();
+
+	$result = $galvanize->query('SELECT * FROM t;');
+	$galvanize->transaction(function () use ($galvanize) {
+			$result = $galvanize->query(
+				'UPDATE t SET foo=:new_value WHERE foo=:old_value;',
+				[
+					'new_value' => 'bar',
+					'old_value' => 'baz'
+				]
+			);
+			$result = $galvanize->query(
+				'UPDATE t SET foo=:new_value WHERE foo=:old_value;',
+				[
+					'new_value' => 'baa',
+					'old_value' => 'bab'
+				]
+			);
+	});
+
 Features
 --------
 
