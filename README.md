@@ -6,10 +6,10 @@ Galvanize is a Galera Cluster-safe MySQL database class
 Features
 --------
 
-# Galera Cluster-safe
+### Galera Cluster-safe
 When using PHP’s mysqli library with a Galera cluster, various nasty transaction-related bugs can easily creep in and cause havoc with your application code, and, consequently, your database. These bugs stem from differences between the assumptions made by the PHP library about how MySQL works, and the way Galera’s implementation of the WSREP interface actually works. Galvanize aims to protect you from these bugs.
 
-# Automatic rollback-and-retry in the event of transaction deadlocks
+### Automatic rollback-and-retry in the event of transaction deadlocks
 Any code inside a function passed to Galvanize's `transaction()` method will be re-tried in the event of a deadlock, up to `Galvanize::MAX_TRANSACTION_ATTEMPTS` times. The default setting is `10`.
 
 		$galvanize->transaction(function () use ($galvanize) {
@@ -34,7 +34,7 @@ Any code inside a function passed to Galvanize's `transaction()` method will be 
 
 The value of `$iterations` might be larger than the number of elements in `$values`.
 
-# "Nested" transaction-like functionality (using SAVEPOINTs)
+### "Nested" transaction-like functionality (using SAVEPOINTs)
 Calls to `transaction()` can be nested, so blocks of work can be applied and rolled back within other blocks of work.
 
 	$galvanize->transaction(function () use ($galvanize) {
@@ -51,10 +51,10 @@ Calls to `transaction()` can be nested, so blocks of work can be applied and rol
 
 This functionality is implemented using SAVEPOINTs. A deadlock will cause execution to return to the beginning of the outermost call to `transaction()`.
 
-# Uncaught exceptions trigger an automatic ROLLBACK
+### Uncaught exceptions trigger an automatic ROLLBACK
 Any uncaught exception occurring within a call to `transaction()` will cause Galvanize to issue a `ROLLBACK` to the database - failing code does not leave transactions open.
 
-# Prepared query-like syntax for automatic escaping to protect against SQL injection attacks
+### Prepared query-like syntax for automatic escaping to protect against SQL injection attacks
 	$galvanize->query('SELECT * FROM t WHERE id=:the_id;', ['the_id' => 10]);
 
 This results in a query being sent as follows:
@@ -69,7 +69,7 @@ Results in a query as follows:
 
 	SELECT * FROM t WHERE id IN ("10","20","30");
 
-# > 90% unit test coverage
+### > 90% unit test coverage
 You can feel safe using and modifying Galvanize, as it is supplied with a comprehensive suite of unit tests.
 
 Extending Galvanize
