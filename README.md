@@ -6,7 +6,8 @@ Galvanize is a Galera Cluster-safe MySQL database class
 Usage
 -----
 
-	// Initial connection
+### Connecting
+
 	$config = [
 		'host' => 'localhost',
 		'user' => 'root',
@@ -17,10 +18,12 @@ Usage
 	$galvanize = new Galvanize(mysqli_init(), $config);
 	$galvanize->connect();
 
-	// A simple query
+### Running a query
+
 	$result = $galvanize->query('SELECT * FROM t;');
 
-	// A transaction
+### Performing a transaction
+
 	$galvanize->transaction(function () use ($galvanize) {
 			$result = $galvanize->query(
 				'UPDATE t SET foo=:new_value WHERE foo=:old_value;',
